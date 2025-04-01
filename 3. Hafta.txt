@@ -1,0 +1,26 @@
+-- Soru 1: USA ülkesine ait 2009 yılı faturaları ve toplamları
+
+
+SELECT SUM(total) 
+FROM invoice 
+WHERE billing_country = 'USA' 
+AND date_part('year', invoice_date) = 2009; 
+
+
+
+-- Soru 2: Tüm parçaları, playlisttrack ve playlist tabloları ile JOIN yaparak listeleme
+
+SELECT * 
+FROM track AS T
+INNER JOIN playlisttrack AS PT ON PT.track_id = T.track_id
+INNER JOIN playlist AS P ON P.playlist_id = PT.playlist_id;
+
+
+-- Soru 3: "Let There Be Rock" albümüne ait parçalar ve sanatçı bilgisi (Büyükten küçüğe sıralı)
+
+SELECT * 
+FROM track AS T
+INNER JOIN album AS AL ON AL.album_id = T.album_id
+INNER JOIN artist AS AR ON AR.artist_id = AL.artist_id
+WHERE AL.title = 'Let There Be Rock' 
+ORDER BY T.milliseconds DESC;
